@@ -1,0 +1,8 @@
+UseTab: Never
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+IndentWidth: 2
+BreakBeforeBraces: Attach
+IndentCaseLabels: false
+ColumnLimit: 0
+SortIncludes: true
