@@ -60,7 +60,7 @@
 /* useful macros */
 #define vec_ptr(vec) &(vec)[0]
 #define mat_ptr(mat) &(mat)[0][0]
-#define mat_elem(mat, i, j) (mat)[(j)][(i)]
+#define mat_elem(mat, i, j) (mat)[(i)][(j)]
 
 /* allocate vector of double */
 static inline double *alloc_dvector(int n) {
@@ -312,6 +312,15 @@ static inline void fprint_dmatrix(FILE *fp, int m, int n, double **mat) {
   }
 }
 
+static inline void fprint_dmatrix_e(FILE *fp, int m, int n, double **mat) {
+  int i, j;
+  fprintf(fp, "%d %d\n", m, n);
+  for (i = 0; i < m; ++i) {
+    for (j = 0; j < n; ++j) fprintf(fp, "%10.5e ", mat_elem(mat, i, j));
+    fprintf(fp, "\n");
+  }
+}
+
 /* print out matrix of float */
 static inline void fprint_fmatrix(FILE *fp, int m, int n, float **mat) {
   int i, j;
@@ -328,6 +337,15 @@ static inline void fprint_zmatrix(FILE *fp, int m, int n, double complex **mat) 
   fprintf(fp, "%d %d\n", m, n);
   for (i = 0; i < m; ++i) {
     for (j = 0; j < n; ++j) fprintf(fp, "(%10.5f,%10.5f) ", creal(mat_elem(mat, i, j)), cimag(mat_elem(mat, i, j)));
+    fprintf(fp, "\n");
+  }
+}
+
+static inline void fprint_zmatrix_e(FILE *fp, int m, int n, double complex **mat) {
+  int i, j;
+  fprintf(fp, "%d %d\n", m, n);
+  for (i = 0; i < m; ++i) {
+    for (j = 0; j < n; ++j) fprintf(fp, "(%10.5e,%10.5e) ", creal(mat_elem(mat, i, j)), cimag(mat_elem(mat, i, j)));
     fprintf(fp, "\n");
   }
 }
